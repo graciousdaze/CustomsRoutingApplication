@@ -11,6 +11,12 @@ namespace CustomsRoutingApplication.Controllers
         {
         }
 
+        [HttpGet]
+        public ActionResult<DestinationRoute> Get()
+        {
+            return new OkObjectResult("To find a route from the US, add the destination's country code to the end of the domain.\nValid Codes: CAN, US, MEX, BLZ, GTM, SLV, HND, NIC, CRI, PAN ");
+        }
+
         [HttpGet("{destination}")]
         public ActionResult<DestinationRoute> Get(string destination)
         {
@@ -19,7 +25,7 @@ namespace CustomsRoutingApplication.Controllers
             if (RoutesDictionary.Routes.ContainsKey(destination))
                 return new DestinationRoute(destination);
             else
-                return NotFound();
+                return NotFound("Invalid country code. Use one of the following: CAN, US, MEX, BLZ, GTM, SLV, HND, NIC, CRI, PAN ");
         }
 
     }
